@@ -51,6 +51,7 @@ jobs:
           script: |
             script: |
                  cd rent_app_v2 
+                 git config --global --add safe.directory /root/rent_app_v2
                  git pull
                  docker-compose -f docker-compose.yml up -d --build
                  docker exec rent_app php artisan optimize

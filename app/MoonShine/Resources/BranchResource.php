@@ -50,8 +50,7 @@ class BranchResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make("name")->sortable(),
-
-
+            Text::make("address")->sortable(),
         ];
     }
 

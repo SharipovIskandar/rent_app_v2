@@ -31,11 +31,11 @@
 <nav id="topnav" class="defaultscroll is-sticky">
     <div class="container relative">
         <!-- Start Logo container-->
-        <a class="logo" href="index.html">
-                    <span class="inline-block dark:hidden">
-                        <img src="assets/images/logo-dark.png" class="l-dark" height="24" alt="">
-                        <img src="assets/images/logo-light.png" class="l-light" height="24" alt="">
-                    </span>
+        <a class="logo" href="/">
+            <span class="inline-block dark:hidden">
+                <img src="assets/images/logo-dark.png" class="l-dark" height="24" alt="">
+                <img src="assets/images/logo-light.png" class="l-light" height="24" alt="">
+            </span>
             <img src="assets/images/logo-light.png" height="24" class="hidden dark:inline-block" alt="">
         </a>
         <!-- End Logo container-->
@@ -56,22 +56,26 @@
 
         <!--Login button Start-->
         <ul class="buy-button list-none mb-0">
-
-            <li class="inline mb-0">
-                <a href="/admin" class="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"><i data-feather="user" class="size-4 stroke-[3]"></i></a>
-            </li>
-            <?php //else: ?><!---->
-            <li class="sm:inline ps-1 mb-0 hidden">
-                <a href="/login" class="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Login</a>
-            </li>
-            <li class="sm:inline ps-1 mb-0 hidden">
-                <a href="/register" class="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Register</a>
-            </li>
-            <?php //endif; ?>
-
-
-
-
+        
+            <?php if(auth()->user()): ?>
+                <!-- Logout Button -->
+                <li class="sm:inline ps-1 mb-0 hidden">
+                    <form action="/logout" method="POST" class="inline">
+                        <?php echo csrf_field(); ?>
+                        <button type="submit" class="btn bg-red-600 hover:bg-red-700 border-red-600 dark:border-red-600 text-white rounded-full">
+                            Logout
+                        </button>
+                    </form>
+                </li>
+            <?php else: ?>
+                <!-- Login and Register Buttons -->
+                <li class="sm:inline ps-1 mb-0 hidden">
+                    <a href="/login" class="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Login</a>
+                </li>
+                <li class="sm:inline ps-1 mb-0 hidden">
+                    <a href="/register" class="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Register</a>
+                </li>
+            <?php endif; ?>
         </ul>
         <!--Login button End-->
 
@@ -80,15 +84,19 @@
             <ul class="navigation-menu justify-end nav-light">
                 <li class="has-submenu parent-parent-menu-item">
                     <a href="/ads">E'lonlar</a>
-
                 </li>
-
                 <li><a href="/branches" class="sub-menu-item">Branch</a></li>
-                <li><a href="/my/profile" class="sub-menu-item">profile</a></li>
-                <li><a href="/ads/create" class="sub-menu-item">elon </a></li>
-                <li><a href="/contact" class="sub-menu-item">contact</a></li>
-
+                <li><a href="/my/profile" class="sub-menu-item">Profile</a></li>
+                <li><a href="/ads/create" class="sub-menu-item">Elon</a></li>
+                <li><a href="/contact" class="sub-menu-item">Contact</a></li>
+                <li><a href="/admin" target="_blank" class="sub-menu-item">Dashboard</a></li>
             </ul><!--end navigation menu-->
         </div><!--end navigation-->
     </div><!--end container-->
 </nav><!--end header-->
+
+<!-- Other page content can go here -->
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

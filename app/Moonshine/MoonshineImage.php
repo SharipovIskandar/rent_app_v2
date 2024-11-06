@@ -59,6 +59,12 @@ class MoonshineImage
         return $this->field->getClientOriginalExtension();
     }
 
+    public function render()
+    {
+        // Tasvirni render qilish uchun HTML qaytarish
+        return '<img src="' . asset('storage/' . $this->dir . '/' . $this->field) . '" alt="' . $this->name . '">';
+    }
+
     public function handleSave($item)
     {
         if ($this->afterSaveCallback) {
@@ -66,3 +72,4 @@ class MoonshineImage
         }
     }
 }
+

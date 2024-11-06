@@ -32,7 +32,7 @@ class ImagesResource extends ModelResource
     {
         return [
             Block::make([
-               Image::make("name")
+               Image::make("image_path")
             ]),
         ];
     }

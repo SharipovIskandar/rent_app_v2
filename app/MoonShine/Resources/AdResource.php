@@ -6,13 +6,12 @@ namespace App\MoonShine\Resources;
 
 use App\Enums\Gender;
 use App\Models\Images;
-use Faker\Core\Number;
-use Faker\Provider\Text;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Ad;
 
 use Illuminate\Support\Str;
 use MoonShine\Fields\Enum;
+use MoonShine\Fields\File;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Relationships\HasMany;
@@ -40,22 +39,25 @@ class AdResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                Image::make('Image', 'image_field')
+                File::make('Image', 'image_field')
                     ->disk('public')
                     ->dir('images')
                     ->allowedExtensions(['jpg', 'png', 'jpeg'])
-                    ->store(function($imageField) {
-                        $uniqueName = Str::uuid() . '.' . $imageField->getExtension();
+                    ->store(function($fileField) {
+                        $file = $fileField->getFile(); // Faylni olish
+                        $uniqueName = Str::uuid() . '.' . $file->getClientOriginalExtension(); // Noyob nom yaratish
                         $path = 'images/' . $uniqueName;
 
-                        $imageField->storeAs('public/images', $uniqueName);
+                        // Faylni saqlash
+                        $file->storeAs('public/images', $uniqueName);
 
-                        return $path;
+                        return $path; // Faylni saqlashdan keyin yo'lni qaytarish
                     })
-                    ->afterStore(function($imageField, $path) {
-                        Images::query()->create([
+                    ->afterStore(function($fileField, $path) {
+                        // Fayl saqlangandan keyin ma'lumotlar bazasiga saqlash
+                        Images::create([
                             'image_path' => $path,
-                            'ad_id' => $imageField->model->id,
+                            'ad_id' => $fileField->model->id, // Agar kerak bo'lsa
                         ]);
                     }),
                 \MoonShine\Fields\Text::make("title"),

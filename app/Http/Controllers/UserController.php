@@ -12,13 +12,11 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        // User modelidagi bookmarkAds metodini chaqirish
         if ($user->bookmarkAds()->where('ad_id', $id)->exists()) {
 
             $user->bookmarkAds()->detach($id);
             return back()->with('message', "elon o'chiildi");
         } else {
-            // Agar e'lon bookmarklangan bo'lmasa, qo'shish
             $user->bookmarkAds()->attach($id);
             return back()->with('message', "elon yaratildi");
         }

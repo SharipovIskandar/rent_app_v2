@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use MoonShine\Fields\Password;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
@@ -54,7 +55,8 @@ class UserResource extends ModelResource
              Text::make("email")->sortable(),
              Text::make("position")->sortable(),
              Text::make("gender")->sortable(),
-              Text::make("phone")->sortable()
+              Text::make("phone")->sortable(),
+              Password::make("password")->sortable(),
         ];
     }
 
@@ -69,7 +71,8 @@ class UserResource extends ModelResource
             Text::make("email")->sortable(),
             Text::make("position")->sortable(),
             Text::make("gender")->sortable(),
-            Text::make("phone")->sortable()
+            Text::make("phone")->sortable(),
+            Password::make("password")->sortable(),
         ];
     }
 

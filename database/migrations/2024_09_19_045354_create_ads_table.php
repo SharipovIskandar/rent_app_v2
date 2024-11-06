@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('image');
             $table->integer('rooms');
             $table->string('address');
-            $table->foreignId('branches_id')->constrained();
-            $table->foreignId('statuses_id')->constrained();
+            $table->foreignId('branch_id')->constrained();
+            $table->foreignId('status_id')->constrained();
             $table->foreignId('users_id')->constrained() ->onDelete('cascade');
             $table->timestamps();
         });

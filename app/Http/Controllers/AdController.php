@@ -65,9 +65,9 @@ class AdController extends Controller
             'title' => $request->input("title"),
             'description' => $request->input("description"),
             'users_id'=> auth()->id(),
-            'statuses_id' => Status::ACTIVE,
+            'status_id' => Status::ACTIVE,
             'address' => $request->input("address"),
-            'branches_id' => $request->input("branch_id"),
+            'branch_id' => $request->input("branch_id"),
             'price' => $request->input("price"),
             'rooms' => $request->input("rooms"),
              'gender'=>$request->input("gender")
@@ -125,7 +125,7 @@ class AdController extends Controller
     public function find(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
         $searchPhrase = $request->input('search_phrase');
-        $branchId = $request->input('branches_id');
+        $branchId = $request->input('branch_id');
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
         $ads = Ad::query();
@@ -133,7 +133,7 @@ class AdController extends Controller
             $ads->where('title', 'like', '%' . $searchPhrase . '%');
         }
         if ($branchId) {
-            $ads->where('branches_id', $branchId);
+            $ads->where('branch_id', $branchId);
         }
         if ($minPrice) {
             $ads->where('price', '>=', $minPrice);

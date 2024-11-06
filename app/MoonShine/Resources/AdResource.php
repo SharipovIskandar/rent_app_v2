@@ -44,15 +44,18 @@ class AdResource extends ModelResource
                     ->disk('public')
                     ->dir('images')
                     ->allowedExtensions(['jpg', 'png', 'jpeg'])
-                    ->afterSave(function($imageField, $item) {
+                    ->store(function($imageField) {
                         $uniqueName = Str::uuid() . '.' . $imageField->getExtension();
                         $path = 'images/' . $uniqueName;
 
                         $imageField->storeAs('public/images', $uniqueName);
 
+                        return $path;
+                    })
+                    ->afterStore(function($imageField, $path) {
                         Images::query()->create([
                             'image_path' => $path,
-                            'ad_id' => $item->id,
+                            'ad_id' => $imageField->model->id,
                         ]);
                     }),
                 \MoonShine\Fields\Text::make("title"),

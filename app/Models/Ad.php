@@ -18,8 +18,7 @@ class Ad extends Model
         'statuses_id',
          'users_id',
         'branches_id',
-         'gender',
-        'image'];
+         'gender'];
 public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
 {
 return $this->belongsTo(Branch::class,"branches_id");

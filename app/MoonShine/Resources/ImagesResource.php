@@ -32,7 +32,13 @@ class ImagesResource extends ModelResource
     {
         return [
             Block::make([
-               Image::make("Image", "image_path")
+                Block::make([
+                    Image::make("Image", "image_path")
+                        ->disk('public')
+                        ->url(function($item) {
+                            return asset('storage/' . $item->image_path);
+                        })
+                ]),
             ]),
         ];
     }

@@ -41,8 +41,7 @@ class AdResource extends ModelResource
                 Image::make('Image', 'image_field')
                     ->disk('public')
                     ->dir('images')
-                    ->allowedExtensions(['jpg', 'png', 'jpeg'])
-                    ->maxSize(10248),
+                    ->allowedExtensions(['jpg', 'png', 'jpeg']),
                 \MoonShine\Fields\Text::make("title"),
                 \MoonShine\Fields\Text::make("description")->hideOnIndex(),
                 Textarea::make("address"),

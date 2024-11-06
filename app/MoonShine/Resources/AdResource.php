@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Ad;
 
 use MoonShine\Fields\Enum;
+use MoonShine\Fields\Image;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Textarea;
@@ -37,6 +38,11 @@ class AdResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
+                Image::make('Image', 'image_field')
+                    ->disk('public')
+                    ->dir('images')
+                    ->allowedExtensions(['jpg', 'png', 'jpeg'])
+                    ->maxSize(10248),
                 \MoonShine\Fields\Text::make("title"),
                 \MoonShine\Fields\Text::make("description")->hideOnIndex(),
                 Textarea::make("address"),

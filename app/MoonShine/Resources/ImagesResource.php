@@ -32,11 +32,7 @@ class ImagesResource extends ModelResource
     {
         return [
             Block::make([
-                Text::make('Image')
-                    ->displayUsing(function($item) {
-                        return '<img src="' . asset('storage/' . $item->image_path) . '" alt="Image" width="200">';
-                    })
-                    ->html()
+               Image::make("Image", "image_path")
             ]),
         ];
     }

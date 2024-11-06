@@ -22,5 +22,5 @@ COPY . /var/www
 
 RUN composer install
 
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 755 /var/www
+#RUN chown -R www-data:www-data /var/www
+#RUN chmod -R 755 /var/www
